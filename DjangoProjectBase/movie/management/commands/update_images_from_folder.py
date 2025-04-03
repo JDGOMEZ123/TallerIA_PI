@@ -4,7 +4,7 @@ from movie.models import Movie
 from django.conf import settings
 
 class Command(BaseCommand):
-    help = "Actualiza las imágenes de las películas desde la carpeta media/movie/images/images_each"
+    help = "Actualiza las imágenes de las películas desde la carpeta media/movie/images/images_carpeta"
 
     def handle(self, *args, **kwargs):
         image_folder = os.path.join(settings.MEDIA_ROOT, "movie/images/images_carpeta")
@@ -19,7 +19,7 @@ class Command(BaseCommand):
             image_path = os.path.join(image_folder, image_name)
 
             if os.path.exists(image_path):
-                movie.image = f"movie/images/images_each/{image_name}"  # Guarda la ruta relativa
+                movie.image = f"movie/images/images_carpeta/{image_name}"  # Guarda la ruta relativa
                 movie.save()
                 updated_count += 1
                 self.stdout.write(self.style.SUCCESS(f"Imagen actualizada para {movie.title}"))
